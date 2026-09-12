@@ -31,16 +31,15 @@
     </section>
 
     <section>
-      <!-- ✅ EXACTLY TWO CHILDREN INSIDE: book-cover-col + book-content-col -->
+      <!-- TWO-COLUMN ROW: Cover + Preface -->
       <div class="container book-grid">
-
         <!-- LEFT COLUMN: Book Cover -->
         <div class="book-cover-col">
           <img src="assets/book-cover.png" alt="Evolve or Die Book Cover" class="book-cover" />
         </div>
 
-        <!-- RIGHT COLUMN: Info + Compact Subscribe Form -->
-        <div class="book-content-col">
+        <!-- RIGHT COLUMN: Preface / About the Book -->
+        <div class="book-preface-col">
           <h2>About the Book</h2>
           <p>An enterprise faces a familiar dilemma: trapped between an expensive upgrade and a system no one fully understands. Customisations multiplied, teams moved on, and every release widened the gap.</p>
           <p>This is not a software problem — it is a <strong>structure problem</strong>. The organisation has allowed one system to bind together how work is done, decisions are made, data is owned, teams coordinate, and change happens. Technology and operating model became one monolith.</p>
@@ -48,9 +47,14 @@
           <p style="font-size:1.05rem; font-style:italic; color:var(--accent-cyan); padding-left:1rem; border-left:3px solid var(--accent-teal); margin:1.2rem 0;">
             How do we separate the parts that need to evolve independently while preserving the coherence, trust, and shared purpose that enable them to cooperate?
           </p>
+        </div>
+      </div>
 
+      <!-- FULL-WIDTH FORM: Spans Both Columns -->
+      <div class="container">
+        <div class="book-form-fullwidth">
           <h3>Subscribe for Updates & Release Information</h3>
-          <form id="subscribe-form" class="compact-form" action="https://formsubmit.co/ajax/a13090fe870fc77a5d19541b128960b5" method="POST">
+          <form id="subscribe-form" class="fullwidth-form" action="https://formsubmit.co/ajax/a13090fe870fc77a5d19541b128960b5" method="POST">
             <input type="hidden" name="_subject" value="Book Release Update Subscription" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
@@ -73,7 +77,6 @@
             <div id="subscribe-form-status" class="form-status"></div>
           </form>
         </div>
-
       </div>
     </section>
   </main>

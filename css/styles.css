@@ -67,8 +67,8 @@ h1 {
   text-align: center;
 }
 h1 small { font-size: 1.4rem; color: var(--accent-cyan); }
-h2 { font-size: 1.8rem; margin: 2rem 0 1rem; color: var(--accent-cyan); }
-h3 { font-size: 1.2rem; margin: 1rem 0 0.5rem; color: var(--text-primary); }
+h2 { font-size: 1.8rem; margin: 0 0 1rem; color: var(--accent-cyan); }
+h3 { font-size: 1.2rem; margin: 0 0 0.5rem; color: var(--text-primary); }
 p { margin-bottom: 1rem; color: var(--text-secondary); font-size: 1.05rem; }
 
 .hero {
@@ -85,20 +85,38 @@ p { margin-bottom: 1rem; color: var(--text-secondary); font-size: 1.05rem; }
   margin-top: 2rem;
 }
 
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
 /* ==============================================
-   📖 BOOK PAGE — FIXED 2-COLUMN LAYOUT
+   📖 BOOK PAGE — COVER + PREFACE + FULL-WIDTH FORM
    ============================================== */
 .book-grid {
   display: grid !important;
-  grid-template-columns: 320px 1fr !important;
-  gap: 3rem !important;
+  grid-template-columns: 300px 1fr !important;
+  gap: 40px !important;
   align-items: start !important;
   width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+.book-grid > * {
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+  display: block !important;
 }
 
 .book-cover-col {
-  width: 320px !important;
-  flex-shrink: 0;
+  width: 300px !important;
+  flex: 0 0 300px !important;
+  min-width: 300px !important;
+  max-width: 300px !important;
   text-align: center;
 }
 
@@ -112,11 +130,77 @@ p { margin-bottom: 1rem; color: var(--text-secondary); font-size: 1.05rem; }
   margin: 0 auto;
 }
 
-.book-content-col {
+.book-preface-col {
   width: 100% !important;
+  flex: 1 !important;
 }
 
-/* FORM STYLES */
+/* FULL-WIDTH FORM */
+.book-form-fullwidth {
+  margin-top: 3rem;
+}
+
+.book-form-fullwidth h3 {
+  margin-bottom: 1rem;
+  color: var(--accent-cyan);
+}
+
+.fullwidth-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 100%;
+  margin: 0;
+}
+
+.fullwidth-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.fullwidth-form label {
+  margin: 0.8rem 0 0.3rem;
+  font-size: 0.95rem;
+}
+
+.fullwidth-form input,
+.fullwidth-form textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.fullwidth-form input:focus,
+.fullwidth-form textarea:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
+}
+
+.fullwidth-form textarea { resize: none; }
+
+.fullwidth-form button {
+  margin-top: 1.5rem;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(135deg, #0369a1, #0ea5e9);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  width: auto;
+}
+.fullwidth-form button:hover { opacity: 0.9; }
+
+/* STANDARD CONTACT FORM (Homepage) */
 form {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -126,8 +210,8 @@ form {
   margin: 2rem auto;
 }
 
-label { display: block; margin: 1rem 0 0.4rem; font-weight: 500; }
-input, textarea {
+form label { display: block; margin: 1rem 0 0.4rem; font-weight: 500; }
+form input, form textarea {
   width: 100%;
   padding: 0.85rem;
   border: 1px solid var(--border);
@@ -136,13 +220,13 @@ input, textarea {
   color: var(--text-primary);
   font-size: 1rem;
 }
-input:focus, textarea:focus {
+form input:focus, form textarea:focus {
   outline: none;
   border-color: var(--accent-cyan);
   box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
 }
 
-button {
+form button {
   margin-top: 1.5rem;
   padding: 0.9rem 2rem;
   background: linear-gradient(135deg, #0369a1, #0ea5e9);
@@ -155,49 +239,9 @@ button {
   transition: opacity 0.2s;
   width: 100%;
 }
-button:hover { opacity: 0.9; }
+form button:hover { opacity: 0.9; }
 
-/* COMPACT FORM (Book Page) */
-.compact-form {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 1.5rem;
-  max-width: 100%;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.compact-form .form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.compact-form label {
-  margin: 0.8rem 0 0.3rem;
-  font-size: 0.95rem;
-}
-
-.compact-form input,
-.compact-form textarea {
-  padding: 0.7rem 0.85rem;
-  font-size: 0.95rem;
-}
-
-.compact-form textarea { resize: none; }
-
-.compact-form button {
-  margin-top: 1.2rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.95rem;
-}
-
-.note { font-size: 0.9rem; color: #8fb8d8; margin-top: 1rem; }
-code { background: #0f2847; padding: 2px 6px; border-radius: 4px; }
-
-/* AJAX STATUS MESSAGES */
+/* AJAX FORM STATUS MESSAGES */
 .form-status {
   margin-top: 0.85rem;
   padding: 0.75rem;
@@ -220,6 +264,9 @@ code { background: #0f2847; padding: 2px 6px; border-radius: 4px; }
 }
 button:disabled { opacity: 0.6; cursor: not-allowed; }
 
+.note { font-size: 0.9rem; color: #8fb8d8; margin-top: 1rem; }
+code { background: #0f2847; padding: 2px 6px; border-radius: 4px; }
+
 footer {
   background: var(--bg-secondary);
   border-top: 1px solid var(--border);
@@ -231,16 +278,20 @@ footer {
 }
 
 /* ==============================================
-   📱 MOBILE — Stack to Single Column
+   📱 RESPONSIVE — Stack on Mobile
    ============================================== */
 @media (max-width: 900px) {
   .book-grid {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
   }
-  .book-cover-col { width: 100% !important; }
+  .book-cover-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
   .book-cover { width: 260px; }
-  .compact-form .form-row { grid-template-columns: 1fr; }
+  .fullwidth-form .form-row { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
