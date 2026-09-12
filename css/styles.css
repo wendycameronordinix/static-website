@@ -85,15 +85,30 @@ p { margin-bottom: 1rem; color: var(--text-secondary); font-size: 1.05rem; }
   margin-top: 2rem;
 }
 
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: transform 0.3s, border-color 0.3s;
+/* BOOK PAGE 2-COLUMN LAYOUT */
+.book-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 3rem;
+  align-items: start;
 }
-.card:hover { transform: translateY(-4px); border-color: var(--accent-teal); }
 
+.book-cover-col {
+  text-align: center;
+}
+
+.book-cover {
+  max-width: 100%;
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.book-content-col {
+  width: 100%;
+}
+
+/* STANDARD FORM STYLES (Contact Form) */
 form {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -134,34 +149,49 @@ button {
 }
 button:hover { opacity: 0.9; }
 
-.note { font-size: 0.9rem; color: #8fb8d8; margin-top: 1rem; }
-code { background: #0f2847; padding: 2px 6px; border-radius: 4px; }
-
-.book-cover {
-  max-width: 300px;
-  margin: 2rem auto;
-  display: block;
+/* COMPACT FORM STYLES (Book Subscribe Form) */
+.compact-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  padding: 1.5rem;
+  margin-top: 1rem;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
-footer {
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border);
-  padding: 2rem 0;
-  margin-top: 1rem;
-  text-align: center;
-  color: var(--text-secondary);
+.compact-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.compact-form label {
+  margin: 0.8rem 0 0.3rem;
   font-size: 0.95rem;
 }
 
-@media (max-width: 768px) {
-  h1 { font-size: 1.9rem; }
-  .nav-inner { flex-direction: column; text-align: center; }
-  nav { margin-top: 0.5rem; }
-  nav a { display: inline-block; padding: 0.4rem; margin: 0.1rem; }
+.compact-form input,
+.compact-form textarea {
+  padding: 0.7rem 0.85rem;
+  font-size: 0.95rem;
 }
-/* FORM STATUS MESSAGES (AJAX FORMS) */
+
+.compact-form textarea {
+  resize: none;
+}
+
+.compact-form button {
+  margin-top: 1.2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.note { font-size: 0.9rem; color: #8fb8d8; margin-top: 1rem; }
+code { background: #0f2847; padding: 2px 6px; border-radius: 4px; }
+
+/* AJAX FORM STATUS MESSAGES */
 .form-status {
   margin-top: 0.85rem;
   padding: 0.75rem;
@@ -188,4 +218,34 @@ footer {
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  padding: 2rem 0;
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 900px) {
+  .book-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .book-cover { width: 260px; }
+  .compact-form .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 { font-size: 1.9rem; }
+  .nav-inner { flex-direction: column; text-align: center; }
+  nav { margin-top: 0.5rem; }
+  nav a { display: inline-block; padding: 0.4rem; margin: 0.1rem; }
+  form { padding: 1.5rem; margin: 2rem 1rem; }
 }

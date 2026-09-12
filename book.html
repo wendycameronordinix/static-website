@@ -87,41 +87,6 @@
     </div>
   </footer>
 
-  <script>
-    const subscribeForm = document.getElementById('subscribe-form');
-    const subscribeSubmit = document.getElementById('subscribe-submit');
-    const subscribeStatus = document.getElementById('subscribe-form-status');
-
-    subscribeForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      subscribeSubmit.disabled = true;
-      subscribeSubmit.textContent = 'Subscribing...';
-      subscribeStatus.textContent = '';
-      subscribeStatus.className = 'form-status';
-
-      try {
-        const formData = new FormData(subscribeForm);
-        const response = await fetch(subscribeForm.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          subscribeStatus.textContent = '✅ Successfully subscribed! Thank you.';
-          subscribeStatus.classList.add('success');
-          subscribeForm.reset();
-        } else {
-          throw new Error('Server responded with an error');
-        }
-      } catch (err) {
-        subscribeStatus.textContent = '⚠️ There was an error. Please try again or email us directly.';
-        subscribeStatus.classList.add('error');
-      } finally {
-        subscribeSubmit.disabled = false;
-        subscribeSubmit.textContent = 'Subscribe to Updates';
-      }
-    });
-  </script>
+  <script src="js/form-submit.js"></script>
 </body>
 </html>

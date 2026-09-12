@@ -99,41 +99,6 @@
     </div>
   </footer>
 
-  <script>
-    const contactForm = document.getElementById('contact-form');
-    const contactSubmit = document.getElementById('contact-submit');
-    const contactStatus = document.getElementById('contact-form-status');
-
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      contactSubmit.disabled = true;
-      contactSubmit.textContent = 'Sending...';
-      contactStatus.textContent = '';
-      contactStatus.className = 'form-status';
-
-      try {
-        const formData = new FormData(contactForm);
-        const response = await fetch(contactForm.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          contactStatus.textContent = '✅ Message sent successfully! Thank you.';
-          contactStatus.classList.add('success');
-          contactForm.reset();
-        } else {
-          throw new Error('Server responded with an error');
-        }
-      } catch (err) {
-        contactStatus.textContent = '⚠️ There was an error sending your message. Please try again or email us directly.';
-        contactStatus.classList.add('error');
-      } finally {
-        contactSubmit.disabled = false;
-        contactSubmit.textContent = 'Send Message';
-      }
-    });
-  </script>
+  <script src="js/form-submit.js"></script>
 </body>
 </html>
