@@ -293,7 +293,6 @@ footer {
   .book-cover { width: 260px; }
   .fullwidth-form .form-row { grid-template-columns: 1fr; }
 }
-
 @media (max-width: 768px) {
   h1 { font-size: 1.9rem; }
   .nav-inner { flex-direction: column; text-align: center; }
@@ -301,3 +300,6 @@ footer {
   nav a { display: inline-block; padding: 0.4rem; margin: 0.1rem; }
   form { padding: 1.5rem; margin: 2rem 1rem; }
 }
+/* Clickable Logo - Hover Effect */
+a:has(.logo-wrap) { transition: opacity 0.2s ease; }
+a:has(.logo-wrap):hover { opacity: 0.85; text-decoration: none; }
