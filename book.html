@@ -48,7 +48,7 @@
           </p>
 
           <h3>Subscribe for Updates & Release Information</h3>
-          <form class="compact-form" action="https://formsubmit.co/a13090fe870fc77a5d19541b128960b5" method="POST">
+          <form id="subscribe-form" class="compact-form" action="https://formsubmit.co/ajax/a13090fe870fc77a5d19541b128960b5" method="POST">
             <input type="hidden" name="_subject" value="Book Release Update Subscription" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
@@ -67,8 +67,8 @@
             <label for="sub-notes">Areas of interest (optional)</label>
             <textarea id="sub-notes" name="Areas of Interest" rows="2" placeholder="e.g. Microservices, AI, governance..."></textarea>
 
-            <button type="submit">Subscribe to Updates</button>
-            <p class="note">Updates sent to your email. All submissions routed securely.</p>
+            <button type="submit" id="subscribe-submit">Subscribe to Updates</button>
+            <div id="subscribe-form-status" class="form-status"></div>
           </form>
         </div>
       </div>
@@ -86,5 +86,42 @@
       <p style="margin-top:0.5rem;font-size:0.85rem;">© 2026 Ordinix Limited. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    const subscribeForm = document.getElementById('subscribe-form');
+    const subscribeSubmit = document.getElementById('subscribe-submit');
+    const subscribeStatus = document.getElementById('subscribe-form-status');
+
+    subscribeForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      subscribeSubmit.disabled = true;
+      subscribeSubmit.textContent = 'Subscribing...';
+      subscribeStatus.textContent = '';
+      subscribeStatus.className = 'form-status';
+
+      try {
+        const formData = new FormData(subscribeForm);
+        const response = await fetch(subscribeForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          subscribeStatus.textContent = '✅ Successfully subscribed! Thank you.';
+          subscribeStatus.classList.add('success');
+          subscribeForm.reset();
+        } else {
+          throw new Error('Server responded with an error');
+        }
+      } catch (err) {
+        subscribeStatus.textContent = '⚠️ There was an error. Please try again or email us directly.';
+        subscribeStatus.classList.add('error');
+      } finally {
+        subscribeSubmit.disabled = false;
+        subscribeSubmit.textContent = 'Subscribe to Updates';
+      }
+    });
+  </script>
 </body>
 </html>

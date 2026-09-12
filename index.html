@@ -70,17 +70,18 @@
     <section id="contact">
       <div class="container">
         <h2>Get in Touch</h2>
-        <form action="https://formsubmit.co/a13090fe870fc77a5d19541b128960b5" method="POST">
+        <form id="contact-form" action="https://formsubmit.co/ajax/a13090fe870fc77a5d19541b128960b5" method="POST">
           <input type="hidden" name="_subject" value="New Ordinix Website Enquiry" />
           <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
           <label for="name">Your Name</label>
           <input type="text" id="name" name="name" required />
           <label for="email">Your Email</label>
           <input type="email" id="email" name="email" required />
           <label for="message">Your Message</label>
           <textarea id="message" name="message" rows="5" required></textarea>
-          <button type="submit">Send Message</button>
-          <p class="note">All submissions routed securely to your inbox.</p>
+          <button type="submit" id="contact-submit">Send Message</button>
+          <div id="contact-form-status" class="form-status"></div>
         </form>
       </div>
     </section>
@@ -97,5 +98,42 @@
       <p style="margin-top:0.5rem;font-size:0.85rem;">© 2026 Ordinix Limited. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    const contactForm = document.getElementById('contact-form');
+    const contactSubmit = document.getElementById('contact-submit');
+    const contactStatus = document.getElementById('contact-form-status');
+
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      contactSubmit.disabled = true;
+      contactSubmit.textContent = 'Sending...';
+      contactStatus.textContent = '';
+      contactStatus.className = 'form-status';
+
+      try {
+        const formData = new FormData(contactForm);
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          contactStatus.textContent = '✅ Message sent successfully! Thank you.';
+          contactStatus.classList.add('success');
+          contactForm.reset();
+        } else {
+          throw new Error('Server responded with an error');
+        }
+      } catch (err) {
+        contactStatus.textContent = '⚠️ There was an error sending your message. Please try again or email us directly.';
+        contactStatus.classList.add('error');
+      } finally {
+        contactSubmit.disabled = false;
+        contactSubmit.textContent = 'Send Message';
+      }
+    });
+  </script>
 </body>
 </html>
